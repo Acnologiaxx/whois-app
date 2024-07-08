@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+Deployed in Vercel [here](https://vercel.com/jason-rondas-projects/whois-app)
+
 ## Available Scripts
 
 To get started in running local:
