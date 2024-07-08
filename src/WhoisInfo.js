@@ -7,7 +7,7 @@ function WhoisInfo({ data, infoType }) {
     const { domainName, registrarName, createdDate, expiresDate, strippedText } = data;
     const estimatedDomainAge = calculateDomainAge(createdDate);
     const nameServers =
-      strippedText[0]
+      strippedText
         .match(/Name Server:\s*(\S+)/g)
         ?.map((ns) => ns.split(":")[1].trim()) || [];
 
@@ -70,7 +70,6 @@ function WhoisInfo({ data, infoType }) {
     );
   } else if (infoType === 'contact') {
     const { registrant, technicalContact, administrativeContact, contactEmail } = data;
-    console.log(data)
     return (
       <div className="bg-white shadow-md rounded-lg p-6 mt-6">
         <h2 className="text-2xl font-bold mb-4 text-blue-600">
@@ -96,13 +95,13 @@ function WhoisInfo({ data, infoType }) {
           <tbody className="bg-white divide-y divide-gray-200">
             <tr>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {registrant[0].name[0]}
+                {registrant.name}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {technicalContact[0].name[0]}
+                {technicalContact.name}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {administrativeContact[0].name[0]}
+                {administrativeContact.name}
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 {contactEmail}

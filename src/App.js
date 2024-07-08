@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import WhoisForm from "./WhoisForm";
 import WhoisInfo from "./WhoisInfo";
 import axios from "axios";
-import xml2js from "xml2js";
 
 function App() {
   const [data, setData] = useState(null);
@@ -12,11 +11,11 @@ function App() {
   const fetchWhoisData = async (domain, infoType) => {
     try {
       const response = await axios.get(
-        `https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=${process.env.REACT_APP_API_KEY}&domainName=${domain}&infoType=${infoType}`,
-        { headers: { Accept: "application/xml" } }
+        `https://www.whoisxmlapi.com/whoisserver/WhoisService?apiKey=${process.env.REACT_APP_API_KEY}&domainName=${domain}&infoType=${infoType}&outputFormat=JSON`,
+        { headers: { Accept: "application/json" } }
       );
-      const result = await xml2js.parseStringPromise(response.data);
-      setData(result.WhoisRecord);
+
+      setData(response.data.WhoisRecord);
       setError(null);
     } catch (error) {
       setError("Failed to fetch data. Please try again.");
